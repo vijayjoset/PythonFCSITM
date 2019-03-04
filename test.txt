@@ -1,0 +1,5 @@
+This is a new line in our new file
+ This is the new text which is appended to the end of the file
+ and add one more new line to the last
+ This is the new text which is appended to the end of the file
+ and add one more new line to the last
