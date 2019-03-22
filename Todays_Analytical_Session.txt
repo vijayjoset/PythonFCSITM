@@ -1,0 +1,74 @@
+# -*- coding: utf-8 -*-
+"""
+Spyder Editor
+
+This is a temporary script file.
+"""
+#Sample 1
+
+import pandas as pd
+dataset = pd.read_excel("correlation.xlsx", sheet_name=0)
+
+dataset
+
+from scipy.stats import pearsonr
+stat,p=pearsonr(dataset.Attitude,dataset.Duration)
+
+print(stat,p)
+
+#Sample 2
+
+dataset12 = pd.read_excel("regression1.xlsx",sheet_name=0)
+
+dataset12.columns
+
+Y=dataset12.Attitude
+X=dataset12.Duration
+
+import statsmodels.api as sm
+
+X=sm.add_constant(X)
+
+Simple=sm.OLS(Y,X)
+
+result=Simple.fit()
+
+result.summary()
+
+#Multiple
+
+Y=dataset12.Attitude
+X=dataset12[['Duration','Importance']]
+
+X=sm.add_constant(X)
+
+Multiple=sm.OLS(Y,X)
+
+result=Multiple.fit()
+
+result.summary()
+
+#draw scatter plot
+
+import matplotlib.pyplot as plt
+
+plt.scatter(dataset12.Attitude,dataset12.Duration)
+
+#draw hetroscedasticity
+
+plt.hist(dataset12.Attitude)
+
+plt.hist(dataset12.Duration)
+
+
+#draw multicolinearity
+
+stat,p=pearsonr(dataset12.Duration,dataset12.Importance)
+
+print(stat,p)
+
+#draw Autocorrelation
+
+stat,p=pearsonr(dataset12.Attitude,dataset12.Duration)
+
+print(stat,p)
